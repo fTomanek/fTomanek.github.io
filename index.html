@@ -17,7 +17,7 @@
         div{
             background-color: red;
             width: 100px;
-            height: 100px;
+            height: 100px;  
         }
 
     </style>
@@ -31,6 +31,27 @@
     <button>
         <a href="/test/">Press</a>
     </button>
+
+    <h1>Clients</h1>
+    <ul id="client-list"></ul>
+
+
+    <script>
+        fetch('database.json')
+            .then(response => response.json())  // Convert the response to JSON format
+            .then(data => {
+      // Get the HTML element to display the clients
+                const clientList = document.getElementById('client-list');
+
+      // Loop through the JSON data and display it
+            data.forEach(client => {
+                const listItem = document.createElement('li');  // Create a new list item for each client
+                listItem.textContent = `Name: ${client.name}, Number: ${client.number}`;  // Add text to the list item
+                clientList.appendChild(listItem);  // Add the list item to the 'client-list' element
+            });
+        })
+        .catch(error => console.error('Error fetching client data:', error));  // Handle errors
+    </script>
     
 </body>
 </html>
